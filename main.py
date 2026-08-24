@@ -5,20 +5,16 @@ import pandas as pd
 # ============================================
 # PARTE 1: Buscar y leer los archivos
 # ============================================
-archivos_csv = glob.glob("sucursal_*.csv")
-archivos_xlsx = glob.glob("sucursal_*.xlsx")
+archivos_csv = glob.glob("datos/sucursal_*.csv")
+archivos_xlsx = glob.glob("datos/sucursal_*.xlsx")
 lista_informes = []
 
 for archivo in archivos_csv:
-    if archivo == "consolidado_limpio.xlsx":
-        continue
     df = pd.read_csv(archivo)
     lista_informes.append(df)
     print(f"Leído CSV: {archivo} - {len(df)} filas")
 
 for archivo in archivos_xlsx:
-    if archivo == "consolidado_limpio.xlsx":
-        continue
     df = pd.read_excel(archivo, engine="openpyxl")
     lista_informes.append(df)
     print(f"Leído XLSX: {archivo} - {len(df)} filas")
@@ -27,7 +23,6 @@ for archivo in archivos_xlsx:
 # ============================================
 # PARTE 2 Y 3: Renombrar columnas distintas
 # ============================================
-# Bogotá tiene columnas con nombres diferentes ('Fecha_Venta').
 for i, df in enumerate(lista_informes):
     if "Fecha_Venta" in df.columns:
         lista_informes[i] = df.rename(
@@ -68,8 +63,8 @@ print(
 # ============================================
 # PARTE 5: Guardar el resultado limpio
 # ============================================
-df_consolidado.to_excel("consolidado_limpio.xlsx", index=False)
-print("✔ Archivo 'consolidado_limpio.xlsx' guardado con éxito.")
+df_consolidado.to_excel("resultados/consolidado_limpio.xlsx", index=False)
+print("✔ Archivo 'resultados/consolidado_limpio.xlsx' guardado con éxito.")
 
 
 # ============================================
@@ -88,7 +83,7 @@ plt.ylabel("Ventas totales ($)")
 plt.xlabel("Categoría")
 plt.xticks(rotation=0)
 plt.tight_layout()
-plt.savefig("grafico_ventas_categoria.png")
+plt.savefig("resultados/grafico_ventas_categoria.png")
 plt.show()
 
 # 6b. Gráfico de Torta: Participación por vendedor
@@ -101,7 +96,7 @@ ventas_por_vendedor.plot(
 )
 plt.ylabel("")
 plt.tight_layout()
-plt.savefig("grafico_ventas_vendedor.png")
+plt.savefig("resultados/grafico_ventas_vendedor.png")
 plt.show()
 
 # 6c. Producto más frecuente (Análisis con value_counts)
@@ -117,5 +112,5 @@ plt.ylabel("Cantidad de Registros de Venta")
 plt.xlabel("Producto")
 plt.xticks(rotation=30, ha="right")
 plt.tight_layout()
-plt.savefig("grafico_productos_frecuencia.png")
+plt.savefig("resultados/grafico_productos_frecuencia.png")
 plt.show()
