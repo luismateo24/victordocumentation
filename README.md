@@ -8,7 +8,7 @@ Proyecto desarrollado para automatizar la lectura, limpieza, consolidación y vi
 
 ```text
 bot-ventas/
-├── datos/
+├── data/
 │   ├── sucursal_barranquilla.xlsx
 │   ├── sucursal_bogota.xlsx
 │   ├── sucursal_cali.csv

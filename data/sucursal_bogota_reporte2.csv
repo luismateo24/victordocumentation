@@ -1,0 +1,16 @@
+fecha,producto,categoria,cantidad,precio_unitario,vendedor,metodo_pago
+2026-06-19,Medias deportivas,Ropa,7,78000.0,Felipe Torres,Transferencia
+2026-06-12,Parlante Bluetooth,Electronica,2,127500.0,Sofia Mena,Transferencia
+2026-06-18,Chaqueta impermeable,Ropa,5,86700.0,Felipe Torres,Efectivo
+2026-07-06,Cargador USB-C,Electronica,3,98800.0,Camila Ruiz,Transferencia
+2026-07-04,Parlante Bluetooth,Electronica,4,40200.0,Andres Gomez,Efectivo
+2026-06-11,Medias deportivas,Ropa,8,18200.0,Laura Diaz,Transferencia
+2026-06-23,Jean clasico,Ropa,4,159900.0,Camila Ruiz,Efectivo
+2026-06-10,Gorra deportiva,Ropa,3,36200.0,Felipe Torres,Tarjeta
+2026-07-04,Cargador USB-C,Electronica,7,174100.0,Sofia Mena,Tarjeta
+2026-06-26,Cargador USB-C,Electronica,6,87300.0,Sofia Mena,
+2026-06-15,Camiseta basica,Ropa,4,25600.0,Camila Ruiz,Tarjeta
+2026-06-25,Medias deportivas,Ropa,1,26700.0,Camila Ruiz,Tarjeta
+2026-06-10,Camiseta basica,Ropa,6,26700.0,Andres Gomez,Transferencia
+2026-06-24,Gorra deportiva,Ropa,3,134400.0,Sofia Mena,Efectivo
+2026-07-01,Jean clasico,Ropa,7,46400.0,Camila Ruiz,Transferencia

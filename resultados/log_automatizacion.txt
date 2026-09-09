@@ -6,3 +6,4 @@ Proceso ejecutado: 2026-08-31 16:01:44.979910
 Archivo detectado: sucursal_cali_reporte2.csv
 Total de registros procesados: 71
 ---
+[2026-09-09 17:54:18.684952] Procesamiento ejecutado exitosamente sobre 55 registros.

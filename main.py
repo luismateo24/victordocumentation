@@ -1,16 +1,21 @@
 import glob
+import os
 import matplotlib.pyplot as plt
 import pandas as pd
+
+# Asegurar que existan las carpetas necesarias
+os.makedirs("resultados", exist_ok=True)
 
 # ============================================
 # PARTE 1: Buscar y leer los archivos
 # ============================================
-archivos_csv = glob.glob("datos/sucursal_*.csv")
-archivos_xlsx = glob.glob("datos/sucursal_*.xlsx")
+archivos_csv = glob.glob("data/sucursal_*.csv")
+archivos_xlsx = glob.glob("data/sucursal_*.xlsx")
 lista_informes = []
 
 for archivo in archivos_csv:
-    df = pd.read_csv(archivo)
+    # Soporte para encoding en lectura CSV
+    df = pd.read_csv(archivo, encoding="utf-8")
     lista_informes.append(df)
     print(f"Leído CSV: {archivo} - {len(df)} filas")
 
@@ -84,7 +89,7 @@ plt.xlabel("Categoría")
 plt.xticks(rotation=0)
 plt.tight_layout()
 plt.savefig("resultados/grafico_ventas_categoria.png")
-plt.show()
+plt.close()
 
 # 6b. Gráfico de Torta: Participación por vendedor
 ventas_por_vendedor = df_consolidado.groupby("vendedor")[
@@ -97,7 +102,7 @@ ventas_por_vendedor.plot(
 plt.ylabel("")
 plt.tight_layout()
 plt.savefig("resultados/grafico_ventas_vendedor.png")
-plt.show()
+plt.close()
 
 # 6c. Producto más frecuente (Análisis con value_counts)
 conteo_productos = df_consolidado["producto"].value_counts()
@@ -113,4 +118,52 @@ plt.xlabel("Producto")
 plt.xticks(rotation=30, ha="right")
 plt.tight_layout()
 plt.savefig("resultados/grafico_productos_frecuencia.png")
-plt.show()
+plt.close()
+
+
+# ============================================
+# PARTE 7: Automatización, Registro de Log y Resumen Ejecutivo
+# ============================================
+def procesar_todo():
+    # 1. Registro en el log (con encoding="utf-8")
+    with open("resultados/log_automatizacion.txt", "a", encoding="utf-8") as log:
+        log.write(
+            f"[{pd.Timestamp.now()}] Procesamiento ejecutado exitosamente sobre {len(df_consolidado)} registros.\n"
+        )
+
+    # 2. Cálculo de Métricas requeridas e investigadas
+    total_ventas = df_consolidado["precio_unitario"].sum()
+    categoria_top = (
+        df_consolidado.groupby("categoria")["precio_unitario"].sum().idxmax()
+    )
+    vendedor_top = (
+        df_consolidado.groupby("vendedor")["precio_unitario"].sum().idxmax()
+    )
+
+    # Métricas adicionales solicitadas (investigadas):
+    # - Producto más vendido (por frecuencia usando value_counts)
+    producto_top = df_consolidado["producto"].value_counts().idxmax()
+    # - Promedio de venta por transacción (usando mean)
+    promedio_venta = df_consolidado["precio_unitario"].mean()
+
+    # 3. Banner visual en pantalla
+    print("\n" + "=" * 40)
+    print("  NUEVO REPORTE PROCESADO EXITOSAMENTE")
+    print(f"  Total ventas acumuladas: ${total_ventas:,.0f}")
+    print("=" * 40 + "\n")
+
+    # 4. Resumen ejecutivo en archivo de texto (con encoding="utf-8")
+    with open("resultados/resumen_ejecutivo.txt", "w", encoding="utf-8") as f:
+        f.write("RESUMEN EJECUTIVO - Bot de Ventas\n")
+        f.write(f"Fecha: {pd.Timestamp.now()}\n\n")
+        f.write(f"Categoría con mejor desempeño: {categoria_top}\n")
+        f.write(f"Vendedor con más ventas: {vendedor_top}\n")
+        f.write(f"Producto más vendido: {producto_top}\n")
+        f.write(f"Promedio de venta por transacción: ${promedio_venta:,.2f}\n")
+        f.write(f"Total de ventas acumuladas: ${total_ventas:,.0f}\n")
+
+    print("Proceso completado...")
+
+
+# Ejecución de la automatización
+procesar_todo()

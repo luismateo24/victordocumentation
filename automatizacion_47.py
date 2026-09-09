@@ -8,7 +8,7 @@ import glob
 import matplotlib.pyplot as plt
 
 # Se ajusta a tu carpeta "datos"
-ruta_datos = "datos"
+ruta_datos = "data"
 
 # Asegurar que la carpeta de resultados exista
 if not os.path.exists("resultados"):
